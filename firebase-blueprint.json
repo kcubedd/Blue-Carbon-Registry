@@ -1,0 +1,135 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Public user profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "bannerURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "official", "government", "admin", "guest"] },
+        "totalCredits": { "type": "number" },
+        "restorationsCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "role"]
+    },
+    "UserPrivate": {
+      "title": "UserPrivate",
+      "description": "Sensitive user information",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "mobileNo": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string" },
+        "bankDetails": {
+          "type": "object",
+          "properties": {
+            "accountHolderName": { "type": "string" },
+            "accountNumber": { "type": "string" },
+            "ifsc": { "type": "string" }
+          }
+        }
+      },
+      "required": ["email"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "Restoration activity submission",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["mangrove", "seagrass", "wetland", "cleanup"] },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "date": { "type": "string", "format": "date" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "creditsAssigned": { "type": "number" },
+        "blockchainTxHash": { "type": "string" },
+        "blockchainVerified": { "type": "boolean" },
+        "rejectionReason": { "type": "string" },
+        "reviewedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "imageUrl", "latitude", "longitude", "status"]
+    },
+    "Withdrawal": {
+      "title": "Withdrawal",
+      "description": "Credit withdrawal request",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "creditsRequested": { "type": "number" },
+        "amountINR": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected", "paid"] },
+        "bankDetails": {
+          "type": "object",
+          "properties": {
+            "accountHolderName": { "type": "string" },
+            "accountNumber": { "type": "string" },
+            "ifsc": { "type": "string" }
+          }
+        },
+        "payoutId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "creditsRequested", "amountINR", "status"]
+    },
+    "VerifiedProject": {
+      "title": "VerifiedProject",
+      "description": "Approved and verified restoration project",
+      "type": "object",
+      "properties": {
+        "originalSubmissionId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "date": { "type": "string" },
+        "status": { "type": "string" },
+        "creditsAssigned": { "type": "number" },
+        "approvalTimestamp": { "type": "string", "format": "date-time" },
+        "approvedBy": { "type": "string" },
+        "blockchainStatus": { "type": "string", "enum": ["pending", "confirmed"] },
+        "blockchainTxHash": { "type": "string" },
+        "verifiedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["originalSubmissionId", "userId", "approvalTimestamp", "approvedBy", "blockchainStatus"]
+    },
+    "Event": {
+      "title": "Event",
+      "description": "Environmental restoration event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "location": { "type": "string" },
+        "volunteerLimit": { "type": "number" },
+        "enrolledUsers": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "date", "location"]
+    }
+  },
+  "firestore": {
+    "users": { "schema": "User", "description": "Public user profiles" },
+    "users_private": { "schema": "UserPrivate", "description": "Private user information" },
+    "submissions": { "schema": "Submission", "description": "Restoration submissions" },
+    "verified_projects": { "schema": "VerifiedProject", "description": "Verified restoration projects" },
+    "events": { "schema": "Event", "description": "Restoration events" },
+    "withdrawals": { "schema": "Withdrawal", "description": "Withdrawal requests" },
+    "transactions": { "schema": "Transaction", "description": "Credit history" }
+  }
+}

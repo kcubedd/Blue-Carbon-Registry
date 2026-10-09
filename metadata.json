@@ -1,0 +1,5 @@
+{
+  "name": "Blue carbon restoration registry",
+  "description": "A modern, minimal, glassmorphism-based environmental restoration web app for tracking and verifying projects.",
+  "requestFramePermissions": ["geolocation"]
+}
