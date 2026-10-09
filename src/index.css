@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  --radius-xl: 20px;
+  --radius-2xl: 20px;
+  --radius-3xl: 20px;
+
+  /* Custom Color Scheme */
+  --color-background: #fafbff;
+  --color-primary-text: #3a453a;
+  --color-primary-accent: #005576;
+  --color-secondary-accent: #86c2e3;
+
+  /* Override Slate (Background to Primary Text) */
+  --color-slate-50: #fafbff;
+  --color-slate-100: #f1f4f4;
+  --color-slate-200: #e0e7e7;
+  --color-slate-300: #c8d3d3;
+  --color-slate-400: #a6b8b8;
+  --color-slate-500: #879b9b;
+  --color-slate-600: #6b7f7f;
+  --color-slate-700: #586868;
+  --color-slate-800: #495656;
+  --color-slate-900: #3a453a;
+  --color-slate-950: #262e26;
+
+  /* Override Emerald (Primary Accent) */
+  --color-emerald-50: #eef6f9;
+  --color-emerald-100: #d5eaf2;
+  --color-emerald-200: #aed5e5;
+  --color-emerald-300: #7ebcd5;
+  --color-emerald-400: #499dc1;
+  --color-emerald-500: #2581a6;
+  --color-emerald-600: #005576;
+  --color-emerald-700: #004460;
+  --color-emerald-800: #00364d;
+  --color-emerald-900: #002d41;
+  --color-emerald-950: #001d2d;
+
+  /* Override Blue (Secondary Accent) */
+  --color-blue-50: #f4f9fc;
+  --color-blue-100: #e6f2f8;
+  --color-blue-200: #c8e2f0;
+  --color-blue-300: #9bcbe5;
+  --color-blue-400: #86c2e3;
+  --color-blue-500: #6ab0d6;
+  --color-blue-600: #5294bc;
+  --color-blue-700: #427799;
+  --color-blue-800: #37637e;
+  --color-blue-900: #2f5369;
+  --color-blue-950: #1e3646;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-primary-text);
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 85, 118, 0.05);
+  }
+
+  .glass-navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 30px rgba(0, 85, 118, 0.05);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 28px 14px rgba(255, 255, 255, 1.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent
+    );
+  }
+
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.8),
+      transparent,
+      rgba(255, 255, 255, 0.3)
+    );
+  }
+
+  .glass-button-blue {
+    background: rgba(0, 85, 118, 0.8);
+    color: white;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 85, 118, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 85, 118, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .glass-button-blue:hover {
+    background: rgba(0, 85, 118, 0.95);
+    box-shadow: 0 6px 20px rgba(0, 85, 118, 0.3);
+  }
+}
+
+/* Pixelated to clear animation helper */
+.pixel-reveal {
+  filter: grayscale(100%) blur(10px);
+  transition: filter 3s ease-in-out;
+}
+
+.pixel-reveal.active {
+  filter: grayscale(0%) blur(0px);
+}
+
+/* Hide scrollbar */
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
